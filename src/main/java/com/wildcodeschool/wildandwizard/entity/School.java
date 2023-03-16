@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+
+import java.util.*;;
 
 @Entity
 public class School {
@@ -15,8 +19,24 @@ public class School {
     private Long capacity;
     private String country;
 
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
+    private List<Wizard> wizards;
+
     public School() {
     }
+
+    public School(String name, Long capacity , String country) {
+        this.name = name;
+        this.capacity = capacity;
+        this.country = country;
+    }
+
+    public List<Wizard> getWizards(){
+        return this.wizards;
+    }
+    public void setWizards(List<Wizard> wizards){
+        this.wizards = wizards;
+    } 
 
     public Long getId() {
         return id;
